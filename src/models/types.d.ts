@@ -1,5 +1,6 @@
 type TId = number;
 type TDifficulty = "easy" | "moderate" | "hard";
+type TTableName = "trails" | "regions";
 
 export interface IRegion {
   id: TId;
@@ -9,8 +10,7 @@ export interface IRegion {
   description?: string;
 }
 
-export interface ITrail {
-  id: TId;
+export interface ITrailPrototype {
   title: string;
   slug: string;
   difficulty: TDifficulty;
@@ -19,6 +19,10 @@ export interface ITrail {
   image_url?: string;
   created_at: number;
   region_id: TId;
+}
+
+export interface ITrail extends ITrailPrototype {
+  id: TId;
   region_name: string;
   region_country: string;
 }

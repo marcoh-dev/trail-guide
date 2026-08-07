@@ -34,3 +34,11 @@
   background: #ffccd5;
   color: #9d0208;
 }
+
+[type="submit"]:first-child {
+  margin-bottom: 0;
+}
+
+.align-right {
+  text-align: right;
+}

@@ -3,6 +3,7 @@ import nunjucks from "nunjucks";
 import { VIEWS_DIR, PUBLIC_DIR, PORT } from "./config/constants";
 import { connectDB, closeDB, getDB } from "./models/db.model";
 import webSiteRouter from "./routes/webSite.route";
+import adminRouter from "./routes/admin.route";
 import { logger } from "./middlewares/logger";
 import { templateLocals } from "./middlewares/templateLocals";
 import type { Request, Response, NextFunction } from "express";
@@ -29,6 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/", webSiteRouter);
+app.use("/admin", adminRouter);
 
 app.get("/api/dbstructure", async (_req, res) => {
   const db = getDB();

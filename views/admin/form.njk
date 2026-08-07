@@ -1,0 +1,119 @@
+{% import "macros/trailCard.njk" as macroTrail %}
+{% extends "_base.njk" %}
+
+{% block title %}All Trails{% endblock title %}
+
+{% block main %}
+  <h2>
+    {% if trail %}
+      Edit Trail
+    {% else %}
+      New Trail
+    {% endif %}
+  </h2>
+  {% set formAction = "/admin/trails" %}
+  {% if trail %}
+    {% set formAction = "/admin/trails/" + trail.id %}
+  {% endif %}
+
+  <form action="{{ formAction }}" method="post">
+    <label for="title">
+      Title *
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="{{ trail.title or '' }}"
+        required
+      />
+    </label>
+
+    <fieldset>
+      <legend>Difficulty *</legend>
+
+      <label>
+        <input
+          type="radio"
+          name="difficulty"
+          value="easy"
+          {% if trail.difficulty == "easy" %}checked{% endif %}
+          required
+        />
+        Easy
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="difficulty"
+          value="moderate"
+          {% if trail.difficulty == "moderate" %}checked{% endif %}
+        />
+        Moderate
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="difficulty"
+          value="hard"
+          {% if trail.difficulty == "hard" %}checked{% endif %}
+        />
+        Hard
+      </label>
+    </fieldset>
+
+    <label for="distance_km">
+      Distance (km) *
+      <input
+        type="number"
+        id="distance_km"
+        name="distance_km"
+        step="0.1"
+        min="0.1"
+        value="{{ trail.distance_km or '' }}"
+        required
+      />
+    </label>
+
+    <label for="description">
+      Description
+      <textarea id="description" name="description" rows="5">
+{{ trail.description or '' }}</textarea>
+    </label>
+
+    <label for="image_url">
+      Image URL
+      <input
+        type="url"
+        id="image_url"
+        name="image_url"
+        value="{{ trail.image_url or '' }}"
+      />
+    </label>
+
+    <label for="region_id">Region</label>
+    <select id="region_id" name="region_id" required>
+      <option value="">Select a region</option>
+
+      {% if regions and regions.length %}
+        {% for region in regions %}
+          <option
+            value="{{ region.id }}"
+            {% if trail.region_id == region.id %}selected{% endif %}
+          >
+            {{ region.name }} ({{ region.country }})
+          </option>
+        {% endfor %}
+      {% endif %}
+    </select>
+
+    <button type="submit">
+      {% if trail %}
+        Update Trail
+      {% else %}
+        Create Trail
+      {% endif %}
+    </button>
+  </form>
+{% endblock main %}
