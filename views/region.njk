@@ -1,0 +1,28 @@
+{% import "macros/trailCard.njk" as macroTrail %}
+{% extends "_base.njk" %}
+
+{% block title %}{{ region.name }}{% endblock title %}
+
+{% block main %}
+  <main class="container">
+    <section>
+      <header>
+        <h2>{{ region.name }}</h2>
+        <p><small>{{ region.country }}</small></p>
+      </header>
+
+      {% if region.description %}
+        <p>{{ region.description }}</p>
+      {% endif %}
+    </section>
+    <h2>Trails in {{ region.name }}</h2>
+    {% if trails.length %}
+
+      {% for trail in trails %}
+        {{ macroTrail.trailCard(trail) }}
+      {% endfor %}
+    {% else %}
+      <p>No trails have been added to this region yet.</p>
+    {% endif %}
+  </main>
+{% endblock main %}

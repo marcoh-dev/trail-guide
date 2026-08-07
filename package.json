@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node --env-file=.env dist/index.js",
+    "start": "cross-env NODE_ENV=production node --env-file=.env dist/index.js",
     "dev": "tsx watch --env-file=.env src/app.ts",
     "db:seed": "sqlite3 data/trail-guide.db < data/seed.sql"
   },

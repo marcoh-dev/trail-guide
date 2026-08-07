@@ -1,0 +1,18 @@
+{% macro trailCard(trail) %}
+  <article>
+    <header class="header-badge">
+      <div>
+        <span class="badge {{ trail.difficulty }}">{{ trail.difficulty }}</span>
+      </div>
+
+      <h3>{{ trail.title }}</h3>
+    </header>
+
+    {% if trail.image_url %}
+      <img src="{{ trail.image_url }}" alt="{{ trail.title }}" />
+    {% endif %}
+    <footer>
+      <a href="/trails/{{ trail.slug }}">View trail →</a>
+    </footer>
+  </article>
+{% endmacro %}

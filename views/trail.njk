@@ -1,0 +1,30 @@
+{% extends "_base.njk" %}
+
+{% block title %}{{ trail.title }}{% endblock title %}
+
+{% block main %}
+  <section>
+    <header>
+      <h2>{{ trail.title }}</h2>
+    </header>
+
+    {% if trail.image_url %}
+      <section>
+        <img src="{{ trail.image_url }}" alt="{{ trail.title }}" />
+      </section>
+    {% endif %}
+
+    <p>Difficulty: {{ trail.difficulty }}</p>
+
+    {% if trail.description %}
+      {{ trail.description | safe }}
+    {% endif %}
+
+    <footer>
+      <small>
+        {{ trail.distance_km }} km · {{ trail.region_name }},
+        {{ trail.region_country }} · {{ trail.created_at }}
+      </small>
+    </footer>
+  </section>
+{% endblock main %}

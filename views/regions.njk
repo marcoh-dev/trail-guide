@@ -1,0 +1,28 @@
+{% extends "_base.njk" %}
+
+{% block title %}All Regions{% endblock title %}
+
+{% block main %}
+  <h2>Regions</h2>
+
+  {% if regions.length %}
+    {% for region in regions %}
+      <article>
+        <header>
+          <h3>{{ region.name }}</h3>
+          <small>{{ region.country }}</small>
+        </header>
+
+        {% if region.description %}
+          <p>{{ region.description }}</p>
+        {% endif %}
+
+        <footer>
+          <a href="/regions/{{ region.slug }}">View region →</a>
+        </footer>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>No regions found.</p>
+  {% endif %}
+{% endblock main %}

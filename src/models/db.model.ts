@@ -1,12 +1,12 @@
 import { open, Database } from "sqlite";
 import sqlite3 from "sqlite3";
-import { dbPath } from "../config/constants";
+import { DB_PATH } from "../config/constants";
 
 let db: Database | null = null;
 
 export async function connectDB(): Promise<Database> {
   db = await open({
-    filename: dbPath,
+    filename: DB_PATH,
     driver: sqlite3.Database,
   });
 

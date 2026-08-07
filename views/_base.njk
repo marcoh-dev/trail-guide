@@ -6,16 +6,57 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>{% block title %}Trail Guide{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-	<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
->
+    <title>{% block title %}Home{% endblock %} - {{ siteName }}</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
   </head>
   <body>
-	<header>{% block header %}{% endblock %}</header>
-	<main>{% block main %}{% endblock %}</main>
-	<footer>{% block footer %}{% endblock %}</footer>
+    <header class="container">
+      <nav>
+        <ul>
+          <li>
+            <h1>
+              <a href="/"
+                ><img src="/assets/favicon.svg" class="logo" alt=""
+              /></a>
+              {{ siteName }}
+            </h1>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a
+              href="/"
+              {% if currentPath == "/" or currentPath.startsWith("/trails") %}aria-current="page"{% endif %}
+              >Trails</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="/regions"
+              {% if currentPath.startsWith("/regions") %}aria-current="page"{% endif %}
+              >Regions</a
+            >
+          </li>
+
+          <li>
+            <a
+              href="/admin"
+              {% if currentPath.startsWith("/admin") %}aria-current="page"{% endif %}
+              >Admin</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container">{% block main %}{% endblock %}</main>
+    <footer class="container">
+      {% block footer %}&copy; {{ currentYear }}{% endblock %}
+    </footer>
   </body>
 </html>

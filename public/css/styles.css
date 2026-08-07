@@ -1,0 +1,36 @@
+.logo {
+  width: 1ch;
+}
+
+.header-badge {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1em;
+}
+
+.header-badge h3 {
+  width: 100%;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge.easy {
+  background: #d8f3dc;
+  color: #1b4332;
+}
+
+.badge.moderate {
+  background: #fff3bf;
+  color: #7f4f24;
+}
+
+.badge.hard {
+  background: #ffccd5;
+  color: #9d0208;
+}

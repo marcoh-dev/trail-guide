@@ -1,27 +1,34 @@
 import express from "express";
 import nunjucks from "nunjucks";
-import { viewsDir, publicDir, port } from "./config/constants";
-import { connectDB, closeDB, getDB } from "./models/db";
+import { VIEWS_DIR, PUBLIC_DIR, PORT } from "./config/constants";
+import { connectDB, closeDB, getDB } from "./models/db.model";
+import webSiteRouter from "./routes/webSite.route";
+import { logger } from "./middlewares/logger";
+import { templateLocals } from "./middlewares/templateLocals";
+import type { Request, Response, NextFunction } from "express";
 
 const app = express();
 
 await connectDB();
 
-const njk = nunjucks.configure(viewsDir, { autoescape: true, express: app });
-nunjucks.configure("views", {
+const njk = nunjucks.configure(VIEWS_DIR, {
   autoescape: true,
   express: app,
+  noCache: process.env.NODE_ENV !== "production",
 });
 
 app.set("view engine", "njk");
 
-app.use(express.static(publicDir));
-
-app.get("/", (_req, res) => {
-  res.render("index", {
-    test: "Hello",
-  });
+app.use(logger);
+app.use(templateLocals);
+app.use(express.static(PUBLIC_DIR));
+app.use(express.urlencoded({ extended: true }));
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.locals.currentPath = req.path;
+  next();
 });
+
+app.use("/", webSiteRouter);
 
 app.get("/api/dbstructure", async (_req, res) => {
   const db = getDB();
@@ -40,8 +47,12 @@ app.get("/api/dbstructure", async (_req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.use((_req, res) => {
+  res.status(404).render("404");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
 
 process.on("SIGINT", async () => {
