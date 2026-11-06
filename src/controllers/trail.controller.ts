@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import type { Request, Response } from "express";
 import { getAllTrails, getTrailBySlug } from "../models/trail.model";
 import { formatDate } from "../utils/formatDate";
 import type { IFormattedTrail } from "../models/types";

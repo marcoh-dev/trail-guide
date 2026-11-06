@@ -1,6 +1,10 @@
 type TId = number;
 type TDifficulty = "easy" | "moderate" | "hard";
 type TTableName = "trails" | "regions";
+type TTrailFilters = {
+  difficulty?: TDifficulty;
+  region?: string;
+};
 
 export interface IRegion {
   id: TId;

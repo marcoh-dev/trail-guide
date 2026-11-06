@@ -1,4 +1,5 @@
 import path from "node:path";
+import type { TDifficulty } from "../models/types";
 
 export const PORT = Number(process.env.PORT) || 3000;
 export const SITE_NAME = "Trail Guide";
@@ -10,3 +11,5 @@ export const DB_PATH = path.join(
   process.env.DB_PATH || "data/trail-guide.db",
 );
 export const LOG_PATH = path.join(PROJECT_ROOT, "logs", "logs.txt");
+
+export const DIFFICULTIES: TDifficulty[] = ["easy", "moderate", "hard"];

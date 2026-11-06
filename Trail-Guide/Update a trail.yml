@@ -1,0 +1,19 @@
+info:
+  name: Update a trail
+  type: http
+  seq: 7
+
+http:
+  method: PATCH
+  url: "{{baseURL}}/api/trails/:id"
+  params:
+    - name: id
+      value: "4"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

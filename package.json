@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production node --env-file=.env dist/index.js",
+    "build": "tsc",
     "dev": "tsx watch --env-file=.env src/app.ts",
     "db:seed": "sqlite3 data/trail-guide.db < data/seed.sql"
   },
