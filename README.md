@@ -19,3 +19,19 @@ The data model has two tables. A regions table holds the area each trail belongs
 Styling is handled by pico.css, a class-less CSS framework. You add it once via a CDN link in your base template, then write plain semantic HTML — `<header>`, `<nav>`, `<article>`, `<form>`, `<table>` — and pico styles it for you. There is no design work to do beyond writing correct markup.
 
 The project is broken into four chunks: setup and database, public website, admin panel, public API. Tackle them in order. Each partdepends on the previous one being in place.
+
+## Development
+
+1. Install the dependencies with `npm install`.
+2. Copy `.env.example` to `.env` and set `PORT`, `DB_PATH` (e.g. `data/trail-guide.db`) and an `API_KEY`.
+3. Create the database with `npm run db:seed` if it doesn't exist yet.
+4. Run `npm run dev` and open `http://localhost:<PORT>`.
+
+- `npm start` runs the app in production mode
+- `npm run typecheck` checks the types
+
+### API
+
+The JSON API lives at `/api`. `POST /api/trails`, `PATCH /api/trails/:id` and `DELETE /api/trails/:id` need the API key in the `x-api-key` header.
+
+`bruno/` is a [Bruno](https://www.usebruno.com/) collection with a request for every endpoint. Copy `bruno/.env.example` to `bruno/.env` and set `API_KEY` to the same value as in `.env`, then select the `local` environment.
