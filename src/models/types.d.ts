@@ -19,8 +19,8 @@ export interface ITrailPrototype {
   slug: string;
   difficulty: TDifficulty;
   distance_km: number;
-  description?: string;
-  image_url?: string;
+  description?: string | null;
+  image_url?: string | null;
   created_at: number;
   region_id: TId;
 }

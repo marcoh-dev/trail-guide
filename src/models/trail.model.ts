@@ -85,10 +85,10 @@ export async function getTrailsByRegionId(regionId: TId): Promise<ITrail[]> {
   );
 }
 
-export async function addTrail(data: ITrailPrototype): Promise<void> {
+export async function addTrail(data: ITrailPrototype): Promise<TId> {
   const db = getDB();
 
-  await db.run(
+  const result = await db.run(
     `INSERT INTO trails (
 		region_id,
 		title,
@@ -119,6 +119,8 @@ export async function addTrail(data: ITrailPrototype): Promise<void> {
       "@created_at": data.created_at,
     },
   );
+
+  return result.lastID!;
 }
 
 export async function updateTrail(

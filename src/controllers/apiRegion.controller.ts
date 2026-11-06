@@ -16,7 +16,7 @@ export async function getRegion(req: Request<{ slug: string }>, res: Response) {
   try {
     const regionData = await getRegionBySlug(req.params.slug);
 
-    if (!regionData) return res.status(404).json("Region not found");
+    if (!regionData) return res.status(404).json({ error: "Region not found" });
 
     res.status(200).json(regionData);
   } catch (err) {
@@ -32,7 +32,7 @@ export async function getRegionTrails(
   try {
     const regionData = await getRegionBySlug(req.params.slug);
 
-    if (!regionData) return res.status(404).json("Region not found");
+    if (!regionData) return res.status(404).json({ error: "Region not found" });
 
     const id = regionData.id;
 

@@ -1,10 +1,12 @@
 import { Router } from "express";
+import { requireApiKey } from "../middlewares/apiKey";
 import { getDatabaseStructureController } from "../controllers/apiCommon.controller";
 import {
   getTrails,
   getTrail,
-  removeTrail,
   createTrail,
+  updateTrailController,
+  removeTrail,
 } from "../controllers/apiTrail.controller";
 import {
   getRegions,
@@ -24,22 +26,16 @@ router.get("/regions/:slug", getRegion);
 
 router.get("/regions/:slug/trails", getRegionTrails);
 
-router.post("/trails", createTrail);
+router.post("/trails", requireApiKey, createTrail);
 
-router.delete("/trails/:id", removeTrail);
-/*
+router.patch("/trails/:id", requireApiKey, updateTrailController);
 
-
-
-router.patch("/trails/:id", updateTrail)
-*/
+router.delete("/trails/:id", requireApiKey, removeTrail);
 
 router.get("/dbstructure", getDatabaseStructureController);
 
-export default router;
+router.use((_req, res) => {
+  res.status(404).json({ error: "Not found" });
+});
 
-/*
-POST /api/trails creates a trail from a JSON body. Respond with 201 and the created resource.
-PATCH /api/trails/:id updates the given fields. Respond with 200 and the updated resource, or 404.
-DELETE /api/trails/:id deletes the trail. Respond with 204, or 404 if it does not exist.
-*/
+export default router;

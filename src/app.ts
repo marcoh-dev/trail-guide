@@ -1,7 +1,7 @@
 import express from "express";
 import nunjucks from "nunjucks";
 import { VIEWS_DIR, PUBLIC_DIR, PORT } from "./config/constants";
-import { connectDB, closeDB, getDB } from "./models/db.model";
+import { connectDB, closeDB } from "./models/db.model";
 import webSiteRouter from "./routes/webSite.route";
 import adminRouter from "./routes/admin.route";
 import apiRouter from "./routes/api.route";
@@ -13,7 +13,7 @@ const app = express();
 
 await connectDB();
 
-const njk = nunjucks.configure(VIEWS_DIR, {
+nunjucks.configure(VIEWS_DIR, {
   autoescape: true,
   express: app,
   noCache: process.env.NODE_ENV !== "production",
@@ -25,6 +25,7 @@ app.use(logger);
 app.use(templateLocals);
 app.use(express.static(PUBLIC_DIR));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.locals.currentPath = req.path;
   next();
