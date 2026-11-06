@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import type { Request, Response } from "express";
 import { getAllRegions, getRegionBySlug } from "../models/region.model";
 import { getTrailsByRegionId } from "../models/trail.model";
 

@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import type { Request, Response } from "express";
 import {
   getAllTrails,
   addTrail,
@@ -108,7 +108,6 @@ export async function updateTrailController(
 export async function removeTrail(req: Request<{ id: number }>, res: Response) {
   try {
     await deleteTrail(req.params.id);
-    //res.status(200).json({ message: "Trail deleted" });
     res.redirect("/admin");
   } catch (err) {
     console.error("Failed to delete trail:", err);

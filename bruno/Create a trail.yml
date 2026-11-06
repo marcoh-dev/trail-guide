@@ -1,0 +1,29 @@
+info:
+  name: Create a trail
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseURL}}/api/trails"
+  headers:
+    - name: x-api-key
+      value: "{{apiKey}}"
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Herzogstand Ridge Walk",
+        "difficulty": "moderate",
+        "distance_km": 8.4,
+        "region_id": 1,
+        "description": "<p>Ridge walk with views over Lake Walchensee.</p>",
+        "image_url": null
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -18,3 +18,10 @@ export async function getRegionBySlug(
   );
   return regions.find((region) => region.slug === slug);
 }
+
+export async function getRegionById(id: number): Promise<IRegion | undefined> {
+  const db = getDB();
+  return await db.get<IRegion>(`SELECT * FROM regions WHERE id = @id`, {
+    "@id": id,
+  });
+}

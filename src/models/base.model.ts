@@ -27,3 +27,18 @@ export async function slugExists(
 
   return result !== undefined;
 }
+
+export async function getDatabaseStructure(): Promise<
+  Array<{ name: string; sql: string }>
+> {
+  const db = getDB();
+
+  const tables = await db.all(`
+    SELECT name, sql
+    FROM sqlite_master
+    WHERE type = 'table'
+    ORDER BY name;
+  `);
+
+  return tables;
+}

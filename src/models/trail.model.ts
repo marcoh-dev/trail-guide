@@ -1,17 +1,35 @@
 import { getDB } from "./db.model";
-import type { ITrail, ITrailPrototype, TId } from "./types";
+import type { ITrail, ITrailPrototype, TId, TTrailFilters } from "./types";
 
-export async function getAllTrails(): Promise<ITrail[]> {
+export async function getAllTrails(filters?: TTrailFilters): Promise<ITrail[]> {
   const db = getDB();
-  return await db.all<ITrail[]>(
-    `SELECT 
+
+  let query = `SELECT 
 		trails.*, 
 		regions.name as region_name,
 		regions.country as region_country
 	FROM trails
 	INNER JOIN regions
-	ON trails.region_id = regions.id`,
-  );
+	ON trails.region_id = regions.id`;
+
+  const conditions: string[] = [];
+  const params: Record<string, unknown> = {};
+
+  if (filters?.difficulty) {
+    conditions.push("difficulty = @difficulty");
+    params["@difficulty"] = filters.difficulty;
+  }
+
+  if (filters?.region) {
+    conditions.push("regions.slug = @region");
+    params["@region"] = filters.region;
+  }
+
+  if (conditions.length > 0) {
+    query += " WHERE " + conditions.join(" AND ");
+  }
+
+  return db.all(query, params);
 }
 
 export async function getTrailBySlug(
@@ -67,10 +85,10 @@ export async function getTrailsByRegionId(regionId: TId): Promise<ITrail[]> {
   );
 }
 
-export async function addTrail(data: ITrailPrototype): Promise<void> {
+export async function addTrail(data: ITrailPrototype): Promise<TId> {
   const db = getDB();
 
-  await db.run(
+  const result = await db.run(
     `INSERT INTO trails (
 		region_id,
 		title,
@@ -101,6 +119,8 @@ export async function addTrail(data: ITrailPrototype): Promise<void> {
       "@created_at": data.created_at,
     },
   );
+
+  return result.lastID!;
 }
 
 export async function updateTrail(
@@ -133,7 +153,11 @@ export async function updateTrail(
   );
 }
 
-export async function deleteTrail(id: number): Promise<void> {
+export async function deleteTrail(id: number): Promise<boolean> {
   const db = getDB();
-  await db.run(`DELETE FROM trails WHERE id = @id`, { "@id": id });
+  const result = await db.run(`DELETE FROM trails WHERE id = @id`, {
+    "@id": id,
+  });
+
+  return result.changes! > 0;
 }

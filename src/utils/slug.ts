@@ -1,4 +1,4 @@
-import { slugExists } from "../models/common.model";
+import { slugExists } from "../models/base.model";
 import type { TTableName } from "../models/types";
 
 export async function createUniqueSlug(
