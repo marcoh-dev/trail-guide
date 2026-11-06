@@ -3,3 +3,6 @@ variables:
   - name: baseURL
     value: http://localhost:3000
     description: ""
+  - name: apiKey
+    value: "{{process.env.API_KEY}}"
+    description: ""

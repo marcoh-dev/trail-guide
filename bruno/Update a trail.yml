@@ -10,6 +10,16 @@ http:
     - name: id
       value: "4"
       type: path
+  headers:
+    - name: x-api-key
+      value: "{{apiKey}}"
+  body:
+    type: json
+    data: |-
+      {
+        "difficulty": "hard",
+        "distance_km": 9.1
+      }
   auth: inherit
 
 settings:

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{baseURL}}/api/trails?region=1"
+  url: "{{baseURL}}/api/trails"
   params:
     - name: difficulty
       value: easy
@@ -19,9 +19,6 @@ http:
       value: bavarian-alps
       type: query
       disabled: true
-    - name: region
-      value: "1"
-      type: query
   auth: inherit
 
 settings:
