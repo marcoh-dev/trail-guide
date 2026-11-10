@@ -22,13 +22,13 @@ The project is broken into four chunks: setup and database, public website, admi
 
 ## Development
 
-1. Install the dependencies with `npm install`.
+1. Install the dependencies with `pnpm install`.
 2. Copy `.env.example` to `.env` and set `PORT`, `DB_PATH` (e.g. `data/trail-guide.db`) and an `API_KEY`.
-3. Create the database with `npm run db:seed` if it doesn't exist yet.
-4. Run `npm run dev` and open `http://localhost:<PORT>`.
+3. Create the database with `pnpm db:seed` if it doesn't exist yet.
+4. Run `pnpm dev` and open `http://localhost:<PORT>`.
 
-- `npm start` runs the app in production mode
-- `npm run typecheck` checks the types
+- `pnpm start` runs the app in production mode
+- `pnpm typecheck` checks the types
 
 ### API
 
