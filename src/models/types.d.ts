@@ -2,35 +2,35 @@ type TId = number;
 type TDifficulty = "easy" | "moderate" | "hard";
 type TTableName = "trails" | "regions";
 type TTrailFilters = {
-  difficulty?: TDifficulty;
-  region?: string;
+	difficulty?: TDifficulty;
+	region?: string;
 };
 
 export interface IRegion {
-  id: TId;
-  name: string;
-  slug: string;
-  country: string;
-  description?: string;
+	id: TId;
+	name: string;
+	slug: string;
+	country: string;
+	description?: string;
 }
 
 export interface ITrailPrototype {
-  title: string;
-  slug: string;
-  difficulty: TDifficulty;
-  distance_km: number;
-  description?: string | null;
-  image_url?: string | null;
-  created_at: number;
-  region_id: TId;
+	title: string;
+	slug: string;
+	difficulty: TDifficulty;
+	distance_km: number;
+	description?: string | null;
+	image_url?: string | null;
+	created_at: number;
+	region_id: TId;
 }
 
 export interface ITrail extends ITrailPrototype {
-  id: TId;
-  region_name: string;
-  region_country: string;
+	id: TId;
+	region_name: string;
+	region_country: string;
 }
 
 export interface IFormattedTrail extends ITrail {
-  created_at: string;
+	created_at: string;
 }

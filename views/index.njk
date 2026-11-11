@@ -4,12 +4,12 @@
 {% block title %}All Trails{% endblock title %}
 
 {% block main %}
-  <h2>Trails</h2>
-  {% if trails.length %}
-    {% for trail in trails %}
-      {{ macroTrail.trailCard(trail) }}
-    {% endfor %}
-  {% else %}
-    <p>No trails found.</p>
-  {% endif %}
+	<h2>Trails</h2>
+	{% if trails.length %}
+		{% for trail in trails %}
+			{{ macroTrail.trailCard(trail) }}
+		{% endfor %}
+	{% else %}
+		<p>No trails found.</p>
+	{% endif %}
 {% endblock main %}

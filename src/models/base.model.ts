@@ -2,43 +2,41 @@ import { getDB } from "./db.model";
 import type { TTableName } from "./types";
 
 export async function slugExists(
-  slug: string,
-  table: TTableName,
-  excludeId?: number,
+	slug: string,
+	table: TTableName,
+	excludeId?: number,
 ): Promise<boolean> {
-  const db = getDB();
+	const db = getDB();
 
-  let query = `
+	let query = `
     SELECT 1
     FROM ${table}
     WHERE slug = @slug
   `;
 
-  if (excludeId !== undefined) {
-    query += " AND id != @excludeId";
-  }
+	if (excludeId !== undefined) {
+		query += " AND id != @excludeId";
+	}
 
-  query += " LIMIT 1";
+	query += " LIMIT 1";
 
-  const result = await db.get(query, {
-    "@slug": slug,
-    "@excludeId": excludeId,
-  });
+	const result = await db.get(query, {
+		"@slug": slug,
+		"@excludeId": excludeId,
+	});
 
-  return result !== undefined;
+	return result !== undefined;
 }
 
-export async function getDatabaseStructure(): Promise<
-  Array<{ name: string; sql: string }>
-> {
-  const db = getDB();
+export async function getDatabaseStructure(): Promise<Array<{ name: string; sql: string }>> {
+	const db = getDB();
 
-  const tables = await db.all(`
+	const tables = await db.all(`
     SELECT name, sql
     FROM sqlite_master
     WHERE type = 'table'
     ORDER BY name;
   `);
 
-  return tables;
+	return tables;
 }

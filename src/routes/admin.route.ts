@@ -1,12 +1,13 @@
 import { Router } from "express";
+
 import {
-  listTrails,
-  newTrail,
-  createTrail,
-  editTrail,
-  updateTrailController,
-  removeTrail,
-} from "../controllers/admin.controller";
+	createTrail,
+	editTrail,
+	listTrails,
+	newTrail,
+	removeTrail,
+	updateTrailController,
+} from "@/controllers/admin.controller";
 
 const router = Router();
 

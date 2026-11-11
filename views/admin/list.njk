@@ -4,44 +4,44 @@
 {% block title %}All Trails{% endblock title %}
 
 {% block main %}
-  <h2>Admin Panel</h2>
-  <div class="align-right">
-    <a href="/admin/trails/new" role="button">New Trail</a>
-  </div>
-  {% if trails.length %}
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Trail</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for trail in trails %}
-          <tr>
-            <td>{{ trail.id }}</td>
-            <td>{{ trail.title }}</td>
-            <td>
-              <a
-                href="/admin/trails/{{ trail.id }}/edit"
-                role="button"
-                class="secondary"
-              >
-                Edit
-              </a>
-            </td>
-            <td>
-              <form action="/admin/trails/{{ trail.id }}/delete" method="post">
-                <button type="submit" class="contrast">Delete</button>
-              </form>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>No trails found.</p>
-  {% endif %}
+	<h2>Admin Panel</h2>
+	<div class="align-right">
+		<a href="/admin/trails/new" role="button">New Trail</a>
+	</div>
+	{% if trails.length %}
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Trail</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for trail in trails %}
+					<tr>
+						<td>{{ trail.id }}</td>
+						<td>{{ trail.title }}</td>
+						<td>
+							<a
+								href="/admin/trails/{{ trail.id }}/edit"
+								role="button"
+								class="secondary"
+							>
+								Edit
+							</a>
+						</td>
+						<td>
+							<form action="/admin/trails/{{ trail.id }}/delete" method="post">
+								<button type="submit" class="contrast">Delete</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No trails found.</p>
+	{% endif %}
 {% endblock main %}
