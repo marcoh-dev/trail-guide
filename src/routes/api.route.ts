@@ -1,18 +1,15 @@
 import { Router } from "express";
-import { requireApiKey } from "../middlewares/apiKey";
-import { getDatabaseStructureController } from "../controllers/apiCommon.controller";
+
+import { getDatabaseStructureController } from "@/controllers/apiCommon.controller";
+import { getRegion, getRegions, getRegionTrails } from "@/controllers/apiRegion.controller";
 import {
-  getTrails,
-  getTrail,
-  createTrail,
-  updateTrailController,
-  removeTrail,
-} from "../controllers/apiTrail.controller";
-import {
-  getRegions,
-  getRegion,
-  getRegionTrails,
-} from "../controllers/apiRegion.controller";
+	createTrail,
+	getTrail,
+	getTrails,
+	removeTrail,
+	updateTrailController,
+} from "@/controllers/apiTrail.controller";
+import { requireApiKey } from "@/middlewares/apiKey";
 
 const router = Router();
 
@@ -35,7 +32,7 @@ router.delete("/trails/:id", requireApiKey, removeTrail);
 router.get("/dbstructure", getDatabaseStructureController);
 
 router.use((_req, res) => {
-  res.status(404).json({ error: "Not found" });
+	res.status(404).json({ error: "Not found" });
 });
 
 export default router;

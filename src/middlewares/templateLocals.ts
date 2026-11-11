@@ -1,14 +1,11 @@
-import type { Request, Response, NextFunction } from "express";
-import { SITE_NAME } from "../config/constants";
+import type { NextFunction, Request, Response } from "express";
 
-export function templateLocals(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  res.locals.currentPath = req.path;
-  res.locals.siteName = SITE_NAME;
-  res.locals.currentYear = new Date().getFullYear();
+import { SITE_NAME } from "@/config/constants";
 
-  next();
+export function templateLocals(req: Request, res: Response, next: NextFunction) {
+	res.locals.currentPath = req.path;
+	res.locals.siteName = SITE_NAME;
+	res.locals.currentYear = new Date().getFullYear();
+
+	next();
 }
